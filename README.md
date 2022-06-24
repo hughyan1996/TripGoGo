@@ -1,4 +1,5 @@
 # Practicing Git
 # 使用技術
-Vue
-Bootstrap 5
+1.Vue CLI
+2.Bootstrap 5
+3.Axios
