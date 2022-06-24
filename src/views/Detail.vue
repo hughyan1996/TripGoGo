@@ -66,7 +66,6 @@ export default {
   },
   mounted () {
   this.singleData = this.$route.params;
-  console.log(this.$route.params);
   }
 }
 </script>

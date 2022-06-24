@@ -254,7 +254,6 @@ export default {
         this.allData = newData;
         this.page = 0;
         this.getPagePlace(0);
-        console.log(result);
         this.isLoading = false;
       })
       .catch(() =>{
@@ -323,6 +322,10 @@ export default {
 </script>
 
 <style scoped>
+
+.container-fluid{
+  padding:0;
+}
 .banner{
   width: 100vw;
   height: 500px;
