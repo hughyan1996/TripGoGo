@@ -1,61 +1,70 @@
 <template>
 <div>
   <div class="container-fluid">
-    <div class="banner" :style="{backgroundImage:`url(${imgUrl[type]})`}">
-    <div class="pt-5 d-flex justify-content-between px-5">
-      <img src="@/assets/images/icon_logo_white.png">
-      <Mylove></Mylove>
+    <div class="row banner" :style="{backgroundImage:`url(${imgUrl[type]})`}">
+    <div class="col-12 pt-5">
+      <div class="row mx-5">
+        <div class="col-6">
+          <img src="@/assets/images/icon_logo_white.png" class="mobile-img">
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+          <Mylove></Mylove>
+        </div>
+      </div>
     </div>
-    <div class="title-content">
-      <h2 v-if="type == 0" class="title">景點</h2>
-      <h2 v-if="type == 1" class="title">餐飲</h2>
-      <h2 v-if="type == 2" class="title">旅宿</h2>
-      <h2 v-if="type == 3" class="title">活動</h2>
-      <div class="d-flex pt-4">
+    <div class="col-12">
+      <div class="title-content">
+      <h2 v-if="type == 0" class="title desktop-see">景點</h2>
+      <h2 v-if="type == 1" class="title desktop-see">餐飲</h2>
+      <h2 v-if="type == 2" class="title desktop-see">旅宿</h2>
+      <h2 v-if="type == 3" class="title desktop-see">活動</h2>
+      <div class="d-flex pt-4 ms-1 justify-content-between justify-content-lg-start" style="margin:0 auto;">
         <button @click="getTypePlace(0)" type="button" class="btn typeButton" :class="{'active': type == 0 }">
           <label>景點</label>
-          <img v-if="type == 0" src="@/assets/images/icon_attractions_active.png" width="20" class="mx-1">
-          <img v-else src="@/assets/images/icon_attractions.png" width="20" class="mx-1">
+          <img v-if="type == 0" src="@/assets/images/icon_attractions_active.png" class="typeIcon mx-1">
+          <img v-else src="@/assets/images/icon_attractions.png" class="typeIcon mx-1">
         </button>
         <button @click="getTypePlace(1)" type="button" class="btn typeButton ms-2" :class="{'active': type == 1 }">
           <label>餐飲</label>
-          <img v-if="type == 1" src="@/assets/images/icon_restaurant_active.png" width="20" class="mx-1">
-          <img v-else src="@/assets/images/icon_restaurant.png" width="20" class="mx-1">
+          <img v-if="type == 1" src="@/assets/images/icon_restaurant_active.png" class="typeIcon mx-1">
+          <img v-else src="@/assets/images/icon_restaurant.png" class="typeIcon mx-1">
         </button>
         <button @click="getTypePlace(2)" type="button" class="btn typeButton ms-2" :class="{'active': type == 2 }">
           <label>旅宿</label>
-          <img v-if="type == 2" src="@/assets/images/icon_hotel_active.png" width="20" class="mx-1">
-          <img v-else src="@/assets/images/icon_hotel.png" width="20" class="mx-1">
+          <img v-if="type == 2" src="@/assets/images/icon_hotel_active.png" class="typeIcon mx-1">
+          <img v-else src="@/assets/images/icon_hotel.png" class="typeIcon mx-1">
         </button>
         <button @click="getTypePlace(3)" type="button" class="btn typeButton ms-2" :class="{'active': type == 3 }">
           <label>活動</label>
-          <img v-if="type == 3" src="@/assets/images/icon_activity_active.png" width="20" class="mx-1">
-          <img v-else src="@/assets/images/icon_activity.png" width="20" class="mx-1">
+          <img v-if="type == 3" src="@/assets/images/icon_activity_active.png" class="typeIcon mx-1">
+          <img v-else src="@/assets/images/icon_activity.png" class="typeIcon mx-1">
         </button>
       </div>
-      <div class="row pt-3">
-        <div class="col-4">
+      <div class="row pt-3 ms-1">
+        <div class="col-12 col-lg-4 py-2">
           <select style="padding:20px; border-radius:8px; width:100%; appearance:none;" v-model="city">
             <option selected value='' disabled>選擇想去的地區</option>
             <option v-for="(item,index) in allCity" :key="index" :value="item.city">{{item.name}}</option>
           </select>
         </div>
-        <div class="col-4">
+        <div class="col-10 col-lg-4 py-2 mobile-pr">
           <input @keyup.enter="SearchPlace" type="text" placeholder="請輸入名稱(若不輸入則顯示該地區全部)" style="padding:20px; border-radius:8px; width:100%;" v-model="searchText">
         </div>
-        <div class="col-4">
+        <div class="col-2 col-lg-4 py-2 mobile-pl">
           <button @click="SearchPlace" class="searchButton">
             <img src="@/assets/images/icon_search.png" width="24" class="me-2">
-            <label>搜尋</label>
+            <label class="desktop-see">搜尋</label>
           </button>
         </div>
       </div>
     </div>
+    </div>
   </div>
-  <div class="main">
-    <loading v-model:active="isLoading"/>
+  <div class="row main">
+    <div class="col-12">
+      <loading v-model:active="isLoading"/>
     <div v-if="isLoading==false" class="main-content row pt-5">
-      <div class="col-3 mb-4" v-for="(item,index) in pageData" :key="index">
+      <div class="col-12 col-lg-3 mb-4" v-for="(item,index) in pageData" :key="index">
         <div class="card w-100 h-100" style="position:relative;" @click="openDetail(item)">
           <div class="card-body pb-2">
             <img v-if="item.photoUrl" :src="item.photoUrl" class="card-img-top" style="height:190px">
@@ -91,6 +100,7 @@
           </ul>
         </nav>
       </div>
+    </div>
     </div>
   </div>
   </div>
@@ -322,13 +332,11 @@ export default {
 </script>
 
 <style scoped>
-
 .container-fluid{
   padding:0;
 }
 .banner{
   width: 100vw;
-  height: 500px;
   background-size: cover;
   background-position: center;
 }
@@ -357,6 +365,10 @@ export default {
   color:#FFFFFF;
   background-color: #B72323;
   border-color: #B72323;
+}
+
+.typeIcon{
+  width:20px
 }
 
 .searchButton{
@@ -407,5 +419,43 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media(max-width:1400px){
+
+  .title-content{
+    width:100%;
+    margin:0;
+}
+  .main-content{
+    width:100%;
+    margin:0;
+}
+}
+
+@media (max-width: 960px) {
+  .desktop-see{
+    display:none;
+  }
+  .mobile-img{
+    width:79px;
+  } 
+  .typeButton{
+    width: 90px;
+    height: 45px;
+  }
+  .typeIcon{
+    width:14px;
+  }
+  .searchButton{
+    width: 100%;
+  }
+  .mobile-pr{
+    padding-right:0;
+  }
+
+  .mobile-pl{
+    padding-left:0;
+  }
 }
 </style>

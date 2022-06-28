@@ -2,7 +2,7 @@
 <div>
   <button type="button" class="btn btn-light mylove" data-bs-toggle="modal" data-bs-target="#myLoveModal">
     <img src="@/assets/images/icon_like.png" width="20" class="mx-1">
-    <label>我的最愛</label>
+    <label class="desktop-see">我的最愛</label>
   </button>
 
 <div class="modal fade" id="myLoveModal" tabindex="-1">
@@ -15,7 +15,7 @@
       <div class="modal-body">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-6 mb-4" v-for="(item,index) in myLove" :key="index">
+          <div class="col-12 col-lg-6 mb-4" v-for="(item,index) in myLove" :key="index">
             <div class="card w-100 h-100">
           <div class="card-body pb-2">
             <img v-if="item.photoUrl" :src="item.photoUrl" class="card-img-top" style="height:190px">
@@ -72,5 +72,11 @@ export default {
   overflow : hidden; 
   text-overflow : ellipsis; 
   white-space : nowrap; 
+}
+
+@media (max-width: 960px) {
+  .desktop-see{
+    display:none;
+  }
 }
 </style>
